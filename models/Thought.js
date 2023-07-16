@@ -22,9 +22,9 @@ const reactionSchema = new mongoose.Schema(
   },
   {
     toJSON: {
-      getters: true
+      getters: true,
     },
-    id: false
+    id: false,
   }
 );
 
@@ -34,7 +34,7 @@ const thoughtSchema = new mongoose.Schema(
       type: String,
       required: true,
       minLength: 1,
-      max_length: 280,
+      max_length: 280
     },
     createdAt: {
       type: Date,
@@ -42,7 +42,7 @@ const thoughtSchema = new mongoose.Schema(
     },
     username: {
       type: String,
-      required: true,
+      required: true
     },
     reactions: [reactionSchema],
   },

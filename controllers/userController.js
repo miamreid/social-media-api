@@ -16,7 +16,7 @@ module.exports = {
   // Get a single user by id
   async getUserById(req, res) {
     try {
-      const user = await User.findOne({ _id: req.params.userId })
+      const user = await User.findById(req.params.userId)
         .select('-__v');
 
       if (!user) {
@@ -52,13 +52,13 @@ module.exports = {
       res.json({ message: 'User updated' });
     } catch (err) {
       console.log(err);
-      res.stauts(500).json(err);
+      res.status(500).json(err);
     }
   },
   // Delete a user
   async deleteUser(req, res) {
     try {
-      const user = await User.findOneAndDelete(req.params.userId)
+      const user = await User.findByIdAndDelete(req.params.userId)
       .select('-__v');
       if (!user) {
         return res.status(404).json({ message: 'No user found' })
@@ -70,6 +70,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+  
   async addFriend(req, res) {
     try {
       const user = await User.findOneAndUpdate(
@@ -86,9 +87,9 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  async deleteFriend(req, req) {
+  async deleteFriend(req, res) {
     try {
-      const user = await User.findOneAndDelete(
+      const user = await User.findOneAndUpdate(
         { _id: req.params.userId },
         { $pull: { friends: req.params.friendId } },
         { new: true }
