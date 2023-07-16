@@ -1,113 +1,30 @@
 # social-media-api
 
-Your challenge is to build an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list. You’ll use Express.js for routing, a MongoDB database, and the Mongoose ODM. In addition to using the Express.jsLinks to an external site. and MongooseLinks to an external site. packages, you may also optionally use a JavaScript date library of your choice or the native JavaScript Date object to format timestamps.
+<p align="center">
+<img src="https://forthebadge.com/images/badges/made-with-javascript.svg" alt="js">
+<img src="https://forthebadge.com/images/badges/makes-people-smile.svg" alt="smile">
+<img src="https://forthebadge.com/images/badges/powered-by-coffee.svg" alt="coffee">
+<img src="https://forthebadge.com/images/badges/ctrl-c-ctrl-v.svg" alt="ctrl_c">
+<img src="https://forthebadge.com/images/badges/not-a-bug-a-feature.svg" alt="bug">
+</p>
 
-## User Story
-AS A social media startup
-I WANT an API for my social network that uses a NoSQL database
-SO THAT my website can handle large amounts of unstructured data
 
-## Acceptance Criteria
-GIVEN a social network API
-WHEN I enter the command to invoke the application
-THEN my server is started and the Mongoose models are synced to the MongoDB database
-WHEN I open API GET routes in Insomnia for users and thoughts
-THEN the data for each of these routes is displayed in a formatted JSON
-WHEN I test API POST, PUT, and DELETE routes in Insomnia
-THEN I am able to successfully create, update, and delete users and thoughts in my database
-WHEN I test API POST and DELETE routes in Insomnia
-THEN I am able to successfully create and delete reactions to thoughts and add and remove friends to a user’s friend list
+## Description
+The Social Media API is a fully-functional backend of a social media application. The API allows users to see all users in the database, add/delete/update users, add and delete friends, create thoughts, and more. 
 
-## Models
+## Usage
 
-User
-    username
-        String
-        Unique
-        Required
-        Trimmed
-    email
-        String
-        Required
-        Unique
-        Must match a valid email address (look into Mongoose's matching validation)
-    thoughts
-        Array of _id values referencing the Thought model
-    friends
-        Array of _id values referencing the User model (self-reference)
-Schema Settings
-    Create a virtual called friendCount that retrieves the length of the user's friends array field on query.
+**To use the Social Media API, follow these steps:**
 
-Thought
-    thoughtText
-        String
-        Required
-        Must be between 1 and 280 characters
-    createdAt
-        Date
-        Set default value to the current timestamp
-        Use a getter method to format the timestamp on query
-    username (The user that created this thought)
-        String
-        Required
-    reactions (These are like replies)
-        Array of nested documents created with the reactionSchema
-Schema Settings
-    Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.
+1. **Clone the Repo** Clone the git repository with <code>git clone git@github.com:miamreid/social-media-api.git</code>
 
-Reaction (SCHEMA ONLY)
-    reactionId
-        Use Mongoose's ObjectId data type
-        Default value is set to a new ObjectId
-    reactionBody
-        String
-        Required
-        280 character maximum
-    username
-        String
-        Required
-    createdAt
-        Date
-        Set default value to the current timestamp
-        Use a getter method to format the timestamp on query
-Schema Settings
-    This will not be a model, but rather will be used as the reaction field's subdocument schema in the Thought model.
+2. **Install Dependencies** In your terminal, run <code>npm install</code> or <code>npm i</code> to install dependencies used for the app.<br />
 
-## API Routes
-/api/users
-    GET all users
-    GET a single user by its _id and populated thought and friend data
-    POST a new user:
-        
-        // example data
-        {
-            "username": "lernantino",
-            "email": "lernantino@gmail.com"
-        }
+This app uses:<br />
+- Express
+- Mongoose
 
-    PUT to update a user by its _id
-    DELETE to remove user by its _id
-BONUS: Remove a user's associated thoughts when deleted.
+3. **Start the App** After installing dependencies and packages, run <code>node index.js</code> to initialize mongoose and express.
 
-/api/users/:userId/friends/:friendId
-    POST to add a new friend to a user's friend list
-    DELETE to remove a friend from a user's friend list
-
-/api/thoughts
-    GET to get all thoughts
-    GET to get a single thought by its _id
-    POST to create a new thought (don't forget to push the created thought's _id to the associated user's thoughts array field)
-
-        // example data
-        {
-        "thoughtText": "Here's a cool thought...",
-        "username": "lernantino",
-        "userId": "5edff358a0fcb779aa7b118b"
-        }
-
-    PUT to update a thought by its _id
-    DELETE to remove a thought by its _id
-
-/api/thoughts/:thoughtId/reactions
-    POST to create a reaction stored in a single thought's reactions array field
-    DELETE to pull and remove a reaction by the reaction's reactionId value
+- [Link to Demo](https://drive.google.com/file/d/1PUg1V2Gpk21XwpiyepfuLYyTs_7vs9d-/view)
+- [View the Repo](https://github.com/miamreid/social-media-app)
